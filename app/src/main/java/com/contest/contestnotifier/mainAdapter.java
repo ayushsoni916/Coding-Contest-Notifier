@@ -2,10 +2,13 @@ package com.contest.contestnotifier;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
@@ -15,9 +18,11 @@ public class mainAdapter extends RecyclerView.Adapter<mainAdapter.viewHolder> {
     Context context;
     int[] programImg;
 
-    public mainAdapter(Context context, int[] programImg) {
+
+    public mainAdapter(Context context, int[] programImg ) {
         this.context = context;
         this.programImg = programImg;
+
     }
 
     @NonNull
@@ -32,14 +37,8 @@ public class mainAdapter extends RecyclerView.Adapter<mainAdapter.viewHolder> {
     @Override
     public void onBindViewHolder(@NonNull mainAdapter.viewHolder holder, int position) {
     holder.img.setImageResource(programImg[position]);
-    holder.img.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent  i = new Intent(context , contests.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
-        }
-    });
+//
+
     }
 
     @Override
@@ -47,11 +46,23 @@ public class mainAdapter extends RecyclerView.Adapter<mainAdapter.viewHolder> {
         return programImg.length;
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder {
+    public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView img;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             img = itemView.findViewById(R.id.imageView);
+        }
+
+        @Override
+        public void onClick(View view) {
+//            int pos = this.getAbsoluteAdapterPosition();
+            String a= String.valueOf(this.getAbsoluteAdapterPosition());
+            Intent i = new Intent(context ,contests.class);
+            i.putExtra("value i want" ,a);
+//            Toast.makeText(context, ""+pos, Toast.LENGTH_SHORT).show();
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
         }
     }
 }

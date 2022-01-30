@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 ,R.drawable.download , R.drawable.images,R.drawable.hackerearth,R.drawable.topcoder};
 
 
+
         rcv = findViewById(R.id.rcv);
         manager = new LinearLayoutManager(this);
         rcv.setLayoutManager(manager);
